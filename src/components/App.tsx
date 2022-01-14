@@ -1,6 +1,7 @@
 import React from 'react';
 import { User } from '../model/Model';
-import { AuthService } from '../services/AuthService'
+import { AuthService } from '../services/AuthService';
+import { Login } from "../components/Login";
 
 
 interface AppState{
@@ -14,7 +15,9 @@ export class App extends React.Component<{}, AppState>{
 
   render(){
     return (
-      <div>Hello minimal!</div>
+      <div>
+        <Login authService={this.authService}/>
+      </div>
     )
   }
 }
