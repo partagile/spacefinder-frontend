@@ -1,11 +1,14 @@
 import React, { SyntheticEvent } from "react";
 import { AuthService } from "../services/AuthService";
-
+import { User } from "../model/Model";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import "../styles/output.css";
 
+
+
 interface LoginProps {
-  authService: AuthService;
+  authService: AuthService,
+  setUser: (user: User) => void
 }
 
 interface LoginState {
@@ -37,18 +40,22 @@ export class Login extends React.Component<LoginProps, LoginState> {
 
   private async handleSubmit(event: SyntheticEvent) {
     event.preventDefault();
+    this.setState({loginAttempted: true})
     const result = await this.props.authService.login(
       this.state.emailAddress,
       this.state.password
     );
     console.log('result =' + result)
     if (result) {
+      this.setState({LoginSuccessful: true})
+      this.props.setUser(result)
     } else {
-      console.log("Wrong login")
+      this.setState({LoginSuccessful: false})
     }
   }
 
   render() {
+
     return (
       <>
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
