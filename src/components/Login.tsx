@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { AuthService } from "../services/AuthService";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
@@ -9,19 +9,44 @@ interface LoginProps {
 }
 
 interface LoginState {
-  userName: string;
+  emailAddress: string;
   password: string;
   loginAttempted: boolean;
   LoginSuccessful: boolean;
 }
 
+interface CustomEvent {
+  target: HTMLInputElement;
+}
+
 export class Login extends React.Component<LoginProps, LoginState> {
   state: LoginState = {
-    userName: "",
+    emailAddress: "",
     password: "",
     loginAttempted: false,
     LoginSuccessful: false,
   };
+
+  private setEmailAddress(event: CustomEvent) {
+    this.setState({ emailAddress: event.target.value });
+  }
+
+  private setPassword(event: CustomEvent) {
+    this.setState({ password: event.target.value });
+  }
+
+  private async handleSubmit(event: SyntheticEvent) {
+    event.preventDefault();
+    const result = await this.props.authService.login(
+      this.state.emailAddress,
+      this.state.password
+    );
+    console.log('result =' + result)
+    if (result) {
+    } else {
+      console.log("Wrong login")
+    }
+  }
 
   render() {
     return (
@@ -38,7 +63,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
                 Sign in to your account
               </h2>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={e => this.handleSubmit(e)}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -53,7 +78,8 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Email address"
-                    value={this.state.userName}
+                    value={this.state.emailAddress}
+                    onChange={(e) => this.setEmailAddress(e)}
                   />
                 </div>
                 <div>
@@ -69,6 +95,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                     placeholder="Password"
                     value={this.state.password}
+                    onChange={(e) => this.setPassword(e)}
                   />
                 </div>
               </div>
