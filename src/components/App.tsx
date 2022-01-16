@@ -29,10 +29,11 @@ export class App extends React.Component<{}, AppState> {
     };
   }
 
-  private setUser(user: User) {
+  private async setUser(user: User) {
     this.setState({
       user: user,
     });
+    await this.authService.getAWSTemporaryCreds(user.cognitoUser);
   }
 
   render() {
@@ -54,7 +55,7 @@ export class App extends React.Component<{}, AppState> {
           {/* 
           * react-router-dom v5 code below
           */}
-
+          
         <Router history={history}>
           <div>
             <Navbar user={this.state.user}/>
