@@ -1,9 +1,15 @@
+import { ICreateSpaceState } from "../components/spaces/CreateSpace";
 import { SpaceComponent } from "../components/spaces/SpaceComponent";
 import { Space } from "../model/Model";
 
 
 
 export class DataService {
+    
+    public async createSpaces(ICreateSpace: ICreateSpaceState){
+        return 'testing'
+    }
+    
     public async getSpaces(): Promise<Space[]>{
         const result: Space[] = []
         result.push({
