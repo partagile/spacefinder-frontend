@@ -1,4 +1,4 @@
-import { Component, ReactNode } from "react";
+import { Component } from "react";
 import { Space } from "../../model/Model";
 import { DataService } from "../../services/DataService";
 import { SpaceComponent } from "./SpaceComponent";

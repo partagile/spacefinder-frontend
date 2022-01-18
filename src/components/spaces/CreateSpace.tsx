@@ -19,7 +19,6 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
 
     state: ICreateSpaceState = {
         name:'',
-        description:'',
         location: '',
         photoURL: ''
     }
@@ -67,9 +66,6 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
                 </label><br />
                 <label>Location:<br />
                     <input name='space location' value={this.state.location} onChange={e => this.setLocation(e)} />
-                </label><br />
-                <label>Description:<br />
-                    <input name='space location' value={this.state.description} onChange={e => this.setDescription(e)} />
                 </label><br />
                 <label>Photo:<br />
                     <input name='photo' type='file' onChange={e => this.setPhotoUrl(e)} />
