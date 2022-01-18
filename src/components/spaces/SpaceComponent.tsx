@@ -5,7 +5,7 @@ interface SpaceComponentProps {
     spaceId: string,
     name: string,
     location: string,
-    photoUrl?: string,
+    photoURL?: string,
     reserveSpace: (spaceId: string) => void
 
 }
@@ -15,8 +15,8 @@ const defaultImage: string = require('../../assets/lecture-theater.jpg');
 export class SpaceComponent extends Component <SpaceComponentProps> {
 
     private renderImage(){
-        if (this.props.photoUrl) {
-            return <img src={this.props.photoUrl} alt='Photo of location'/>
+        if (this.props.photoURL) {
+            return <img src={this.props.photoURL} alt='Photo of location'/>
         } else {
             return <img src={defaultImage} alt='Photo of location'/>
         }

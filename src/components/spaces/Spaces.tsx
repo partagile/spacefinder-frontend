@@ -60,9 +60,10 @@ export class Spaces extends Component<SpacesProps, SpacesState> {
 
         for (const space of this.state.spaces) {
             rows.push(
-                <SpaceComponent 
+                <SpaceComponent key={space.spaceId}
                     location={space.location}
                     name={space.name}
+                    photoURL={space.photoURL}
                     spaceId={space.spaceId}
                     reserveSpace={this.reserveSpace}
                 />
