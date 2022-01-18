@@ -1,5 +1,5 @@
 
-
+const spacesUrl = 'https://qoe8b3qb2k.execute-api.us-west-2.amazonaws.com/prod/'
 
 export const config = {
     REGION: 'us-west-2',
@@ -8,5 +8,9 @@ export const config = {
     IDENTITY_POOL_ID: 'us-west-2:5cc69f83-0552-465e-8a4f-ee2968530367',
     SPACES_PHOTOS_BUCKET: 'spaces-photos-024df7423f65',
     TEST_USER_NAME: 'hello',
-    TEST_USER_PASSWORD: '5EApCsq&'
+    TEST_USER_PASSWORD: '5EApCsq&',
+    api: {
+        baseUrl: spacesUrl,
+        spacesUrl: `${spacesUrl}spaces`
+    }
 }
