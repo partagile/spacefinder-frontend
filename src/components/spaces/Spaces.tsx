@@ -81,10 +81,9 @@ export class Spaces extends Component<SpacesProps, SpacesState> {
     }
 
 
-    render(): ReactNode {
+    render() {
         return (
             <div>
-                <h2>Hello from Spaces</h2>
                 <Link to={'/createSpace'}>Create Space</Link> <br />
                 {this.renderSpaces()}
                 <ConfirmModalComponent

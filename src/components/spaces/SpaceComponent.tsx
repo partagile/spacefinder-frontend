@@ -6,6 +6,7 @@ interface SpaceComponentProps {
     name: string,
     location: string,
     photoURL?: string,
+    description?: string,
     reserveSpace: (spaceId: string) => void
 
 }
