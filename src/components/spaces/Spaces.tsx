@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Space } from "../../model/Model";
+import { Space, User } from "../../model/Model";
 import { DataService } from "../../services/DataService";
 import { SpaceComponent } from "./SpaceComponent";
 import { ConfirmModalComponent } from './ConfirmModalComponent';
@@ -13,8 +13,8 @@ interface SpacesState {
 }
 
 interface SpacesProps {
-    dataService: DataService
-
+    dataService: DataService;
+    user: User | undefined;
 }
 
 export class Spaces extends Component<SpacesProps, SpacesState> {

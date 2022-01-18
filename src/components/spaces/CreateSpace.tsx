@@ -1,4 +1,5 @@
 import { Component, SyntheticEvent } from "react";
+import { User } from "../../model/Model";
 import { DataService } from "../../services/DataService";
 
 interface CustomEvent {
@@ -12,7 +13,8 @@ export interface ICreateSpaceState {
     photo?: File
 }
 interface ICreateSpaceProps {
-    dataService: DataService
+    dataService: DataService;
+    user: User | undefined;
 }
 
 export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState> {
@@ -26,11 +28,9 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
     private setName(event: CustomEvent) {
         this.setState({ name: event.target.value });
     }
+
     private setLocation(event: CustomEvent) {
         this.setState({ location: event.target.value });
-    }
-    private setDescription(event: CustomEvent) {
-        this.setState({ description: event.target.value });
     }
 
     private setPhotoUrl(event: CustomEvent) {

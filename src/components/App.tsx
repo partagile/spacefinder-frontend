@@ -22,11 +22,11 @@ export class App extends React.Component<{}, AppState> {
 
   constructor(props: any) {
     super(props);
-
-    this.setUser = this.setUser.bind(this);
     this.state = {
       user: undefined,
     };
+    this.setUser = this.setUser.bind(this);
+
   }
 
   private async setUser(user: User) {
@@ -39,23 +39,6 @@ export class App extends React.Component<{}, AppState> {
   render() {
     return (
       <div className="wrapper">
-          {/* 
-          * react-router-dom v6 code below
-          */}
-          
-          {
-          /* <Navbar user={this.state.user}/>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login authService={this.authService} setUser={this.setUser} />} />
-            <Route path="/profile" element={<Profile authService={this.authService} {this.state.user />} />
-          </Routes> */
-          }
-
-          {/* 
-          * react-router-dom v5 code below
-          */}
-          
         <Router history={history}>
           <div>
             <Navbar user={this.state.user}/>
@@ -68,10 +51,10 @@ export class App extends React.Component<{}, AppState> {
                 <Profile authService={this.authService} user={this.state.user}/>
               </Route>
               <Route exact path='/spaces'>
-                <Spaces dataService={this.dataService}/>
+                <Spaces dataService={this.dataService} user={this.state.user}/>
               </Route>
               <Route exact path='/createSpace'>
-                <CreateSpace dataService={this.dataService}/>
+                <CreateSpace dataService={this.dataService} user={this.state.user}/>
               </Route>
             </Switch>
           </div>
