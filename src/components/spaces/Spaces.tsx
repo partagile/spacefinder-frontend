@@ -18,8 +18,7 @@ interface SpacesProps {
 }
 
 export class Spaces extends Component<SpacesProps, SpacesState> {
-
-
+    
     constructor (props: SpacesProps){
         super(props)
         this.state = {
@@ -57,7 +56,6 @@ export class Spaces extends Component<SpacesProps, SpacesState> {
 
     private renderSpaces(){
         const rows: any[] = []
-
         for (const space of this.state.spaces) {
             rows.push(
                 <SpaceComponent key={space.spaceId}

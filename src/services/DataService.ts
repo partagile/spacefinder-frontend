@@ -33,7 +33,7 @@ export class DataService {
         this.user = user;
     }
 
-    public async createSpaces(iCreateSpace: ICreateSpaceState) {
+    public async createSpace(iCreateSpace: ICreateSpaceState) {
         if (iCreateSpace.photo) {
             const photoUrl = await this.uploadPublicFile(
                 iCreateSpace.photo,
@@ -78,7 +78,6 @@ export class DataService {
 
     public async getSpaces(): Promise<Space[]> {
         if (this.user) {
-            console.log(`Using token: ${this.getUserIdToken()}`) 
             const requestUrl = appConfig.api.spacesUrl
             const requestResult = await fetch(
                 requestUrl, {
