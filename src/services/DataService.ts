@@ -1,17 +1,37 @@
 import { ICreateSpaceState } from "../components/spaces/CreateSpace";
-import { Space } from "../model/Model";
+import { Space, User } from "../model/Model";
 import { S3, config } from "aws-sdk";
 import { config as appConfig } from "./config";
+import { generateRandomId } from "../utils/Utils";
 
 config.update({
     region: appConfig.REGION
 })
 
+
 export class DataService {
 
-    private s3Client = new S3({
-        region: appConfig.REGION
-    })
+    private user: User | undefined;
+    private s3Client: S3 | undefined
+
+        /**
+     * Due to a bug, the s3 client doesn't load the credentials after they are created
+     * Here we are initializing it lazily
+     */
+    private getS3Client():S3 {
+        if (this.s3Client) {
+            return this.s3Client
+        } else {
+            this.s3Client = new S3({
+                region: appConfig.REGION
+            }) 
+            return this.s3Client;
+        }
+    }
+
+    public setUser(user: User){
+        this.user = user;
+    }
 
     public async createSpaces(iCreateSpace: ICreateSpaceState) {
         if (iCreateSpace.photo) {
@@ -34,7 +54,7 @@ export class DataService {
     }
 
     private async uploadPublicFile(file: File, bucket: string) {
-        const fileName = file.name;
+        const fileName = generateRandomId() + file.name;
         const uploadResult = await new S3({ region: appConfig.REGION }).upload({
             Bucket: bucket,
             Key: fileName,
@@ -46,24 +66,31 @@ export class DataService {
 
     }
 
+    private getUserIdToken(){
+        if (this.user) {
+            return this.user.cognitoUser.getSignInUserSession()!.getIdToken().getJwtToken()
+        } else {
+            return '';
+        }
+    }
+    
     public async getSpaces(): Promise<Space[]> {
-        const result: Space[] = []
-        result.push({
-            location: 'Prince George',
-            name: 'NHSC 9-320',
-            spaceId: '123'
-        })
-        result.push({
-            location: 'Vancouver',
-            name: 'FRIE 141',
-            spaceId: '1234'
-        })
-        result.push({
-            location: 'Surrey',
-            name: 'SMH 3-409',
-            spaceId: '12345'
-        })
-        return result
+        if (this.user) {
+            const requestUrl = appConfig.api.spacesUrl
+            const requestResult = await fetch(
+                requestUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': this.getUserIdToken()
+                    }
+                }
+            );
+            const responseJSON = await requestResult.json();
+            return responseJSON;
+        } else {
+            return []
+        }
+
     }
 
 
