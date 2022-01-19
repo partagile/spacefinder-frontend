@@ -1,5 +1,5 @@
 
-const spacesUrl = 'https://q68651sk71.execute-api.us-west-2.amazonaws.com/prod/'
+const spacesUrl = 'https://q68651sk71.execute-api.us-west-2.amazonaws.com/prod'
 
 export const config = {
     REGION: 'us-west-2',
@@ -11,6 +11,6 @@ export const config = {
     TEST_USER_PASSWORD: '5EApCsq&',
     api: {
         baseUrl: spacesUrl,
-        spacesUrl: `${spacesUrl}spaces`
+        spacesUrl: `${spacesUrl}/spaces`
     }
 }

@@ -8,7 +8,6 @@ interface CustomEvent {
 export interface ICreateSpaceState {
     name?: string,
     location?: string,
-    description?: string,
     photoURL?: string,
     photo?: File
 }
@@ -42,6 +41,8 @@ export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState>
     private async handleSubmit(event: SyntheticEvent) {
         event.preventDefault();
         const stateClone = {...this.state};
+        console.log('State Clone')
+        console.log(stateClone)
         try {
             const id = await this.props.dataService.createSpace(stateClone);  
             alert(`created space with id ${id}`);

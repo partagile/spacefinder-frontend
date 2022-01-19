@@ -78,6 +78,7 @@ export class DataService {
 
     public async getSpaces(): Promise<Space[]> {
         if (this.user) {
+            console.log(`Using authenticated token: ${this.getUserIdToken()}`)
             const requestUrl = appConfig.api.spacesUrl
             const requestResult = await fetch(
                 requestUrl, {
