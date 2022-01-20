@@ -55,7 +55,7 @@ export class App extends React.Component<{}, AppState> {
                 <Spaces dataService={this.dataService} user={this.state.user}/>
               </Route>
               <Route exact path='/createSpace'>
-                <CreateSpace dataService={this.dataService} user={this.state.user}/>
+                <CreateSpace dataService={this.dataService}/>
               </Route>
             </Switch>
           </div>

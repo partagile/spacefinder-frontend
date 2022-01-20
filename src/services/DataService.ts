@@ -45,8 +45,14 @@ export class DataService {
         const requestUrl = appConfig.api.spacesUrl;
         const requestOptions: RequestInit = {
             method: 'POST',
+            headers: {
+                'Authorization': this.getUserIdToken()
+            },
             body: JSON.stringify(iCreateSpace)
         }
+        console.log('POST request URL and request options')
+        console.log(requestUrl)
+        console.log(requestOptions)
         const result = await fetch(requestUrl, requestOptions);
         const resultJSON = await result.json();
 

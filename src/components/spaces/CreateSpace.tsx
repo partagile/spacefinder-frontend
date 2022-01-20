@@ -13,7 +13,6 @@ export interface ICreateSpaceState {
 }
 interface ICreateSpaceProps {
     dataService: DataService;
-    user: User | undefined;
 }
 
 export class CreateSpace extends Component<ICreateSpaceProps, ICreateSpaceState> {
